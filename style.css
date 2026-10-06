@@ -263,3 +263,33 @@ body {
     color: var(--text-white);
     transform: translateY(-2px);
 }
+
+/* Hero Stats Grid */
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    backdrop-filter: blur(12px);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-white);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
