@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24/7 AI Support - StreamVault Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="support.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        <span class="logo-icon">📺</span>
+                        <span class="logo-text">StreamVault<span class="pro">PRO</span></span>
+                    </a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="index.html#content">Content</a></li>
+                    <li><a href="index.html#pricing">Pricing</a></li>
+                    <li><a href="support.html" class="active">Support</a></li>
+                </ul>
+                <a href="index.html#pricing" class="nav-cta">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Support Hero -->
+    <section class="support-hero">
+        <div class="container">
+            <div class="support-hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>AI-Powered Support • Average Response: 2 seconds</span>
+                </div>
+                <h1>How Can We Help You?</h1>
+                <p>Get instant answers from our AI assistant or chat with our support team 24/7</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chat Interface -->
+    <section class="chat-section">
+        <div class="container">
+            <div class="chat-layout">
+                <!-- Sidebar with Quick Actions -->
+                <aside class="chat-sidebar">
+                    <div class="sidebar-header">
+                        <h3>Quick Help</h3>
+                    </div>
+                    <div class="quick-topics">
+                        <button class="topic-btn" data-question="How do I activate my subscription?">
+                            <div class="topic-icon">🚀</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Getting Started</div>
+                                <div class="topic-desc">Activation & Setup</div>
+                            </div>
+                        </button>
+                        <button class="topic-btn" data-question="What devices are compatible?">
+                            <div class="topic-icon">📱</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Device Setup</div>
+                                <div class="topic-desc">Compatibility Info</div>
+                            </div>
+                        </button>
+                        <button class="topic-btn" data-question="How do I fix buffering issues?">
+                            <div class="topic-icon">⚡</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Troubleshooting</div>
+                                <div class="topic-desc">Fix Common Issues</div>
+                            </div>
+                        </button>
+                        <button class="topic-btn" data-question="How do I upgrade my plan?">
+                            <div class="topic-icon">⭐</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Account & Billing</div>
+                                <div class="topic-desc">Manage Subscription</div>
+                            </div>
+                        </button>
+                        <button class="topic-btn" data-question="What channels do you offer?">
+                            <div class="topic-icon">📺</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Channel List</div>
+                                <div class="topic-desc">Browse Content</div>
+                            </div>
+                        </button>
+                        <button class="topic-btn" data-question="How can I contact human support?">
+                            <div class="topic-icon">👤</div>
+                            <div class="topic-content">
+                                <div class="topic-title">Human Support</div>
+                                <div class="topic-desc">Talk to a Person</div>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="sidebar-footer">
+                        <div class="support-hours">
+                            <div class="status-indicator"></div>
+                            <div>
+                                <div class="status-title">We're Online</div>
+                                <div class="status-time">24/7 Support Available</div>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Chat Area -->
+                <main class="chat-main">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <div class="agent-info">
+                                <div class="agent-avatar">
+                                    <div class="avatar-gradient">
+                                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                            <path d="M16 4C9.373 4 4 9.373 4 16s5.373 12 12 12 12-5.373 12-12S22.627 4 16 4zm0 3.6c1.988 0 3.6 1.612 3.6 3.6s-1.612 3.6-3.6 3.6-3.6-1.612-3.6-3.6 1.612-3.6 3.6-3.6zm0 17.28c-3 0-5.64-1.536-7.2-3.864.036-2.388 4.8-3.696 7.2-3.696 2.388 0 7.164 1.308 7.2 3.696-1.56 2.328-4.2 3.864-7.2 3.864z" fill="white"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="agent-details">
+                                    <div class="agent-name">AI Assistant</div>
+                                    <div class="agent-status">
+                                        <span class="status-dot"></span>
+                                        <span>Online • Avg. response: 2s</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chat-actions">
+                                <button class="action-btn" id="clearChat" title="Clear Chat">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M3 5h14M8 5V3h4v2M9 9v6M11 9v6M5 5l1 11a2 2 0 002 2h4a2 2 0 002-2l1-11" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages">
+                            <!-- Welcome Message -->
+                            <div class="message agent-message">
+                                <div class="message-avatar">
+                                    <div class="avatar-gradient">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 2.7c1.491 0 2.7 1.209 2.7 2.7s-1.209 2.7-2.7 2.7-2.7-1.209-2.7-2.7 1.209-2.7 2.7-2.7zm0 12.96c-2.25 0-4.23-1.152-5.4-2.898.027-1.791 3.6-2.772 5.4-2.772 1.791 0 5.373.981 5.4 2.772-1.17 1.746-3.15 2.898-5.4 2.898z" fill="white"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div class="message-content">
+                                    <div class="message-text">
+                                        <p>👋 Hi! I'm your StreamVault Pro AI assistant. I'm here to help you with:</p>
+                                        <ul>
+                                            <li>Account activation and setup</li>
+                                            <li>Device compatibility</li>
+                                            <li>Troubleshooting issues</li>
+                                            <li>Billing questions</li>
+                                            <li>And much more!</li>
+                                        </ul>
+                                        <p>How can I assist you today?</p>
+                                    </div>
+                                    <div class="message-time">Just now</div>
+                                </div>
+                            </div>
+
+                            <!-- Suggested Questions -->
+                            <div class="suggested-questions">
+                                <div class="suggestions-label">Popular questions:</div>
+                                <div class="suggestion-chips">
+                                    <button class="chip" data-question="How do I activate my account?">How do I activate my account?</button>
+                                    <button class="chip" data-question="What's your refund policy?">What's your refund policy?</button>
+                                    <button class="chip" data-question="Can I watch on multiple devices?">Can I watch on multiple devices?</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-input-wrapper">
+                            <div class="typing-indicator" id="typingIndicator">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <form class="chat-input-form" id="chatForm">
+                                <div class="input-container">
+                                    <input 
+                                        type="text" 
+                                        id="messageInput" 
+                                        class="chat-input" 
+                                        placeholder="Type your question here..."
+                                        autocomplete="off"
+                                    />
+                                    <button type="submit" class="send-btn" id="sendBtn">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                            <div class="input-footer">
+                                <span class="footer-text">Powered by AI • Instant responses</span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Support Resources -->
+    <section class="support-resources">
+        <div class="container">
+            <div class="section-header">
+                <h2>Other Ways to Get Help</h2>
+                <p>Choose the support method that works best for you</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📧</div>
+                    <h3>Email Support</h3>
+                    <p>Get detailed help via email</p>
+                    <a href="mailto:support@streamvaultpro.com" class="resource-link">support@streamvaultpro.com</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with a human agent</p>
+                    <button class="resource-link resource-btn" onclick="alert('Live chat feature coming soon!')">Start Live Chat</button>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📚</div>
+                    <h3>Help Center</h3>
+                    <p>Browse our knowledge base</p>
+                    <a href="#" class="resource-link">Visit Help Center →</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <h3>Video Tutorials</h3>
+                    <p>Watch step-by-step guides</p>
+                    <a href="#" class="resource-link">Watch Tutorials →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">📺</span>
+                        <span class="logo-text">StreamVault<span class="pro">PRO</span></span>
+                    </div>
+                    <p>Premium IPTV streaming service with 20,000+ channels and 100,000+ VOD titles.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Product</h4>
+                        <ul>
+                            <li><a href="index.html#features">Features</a></li>
+                            <li><a href="index.html#content">Content Library</a></li>
+                            <li><a href="index.html#pricing">Pricing</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Support</h4>
+                        <ul>
+                            <li><a href="support.html">AI Support</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Terms of Service</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="#">Refund Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 StreamVault Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-support-btn" title="Back to Home">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M4 14L14 4l10 10M6 12v10a2 2 0 002 2h4v-6h4v6h4a2 2 0 002-2V12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="support-pulse"></span>
+    </a>
+
+    <script src="support-chat.js"></script>
+</body>
+</html>
