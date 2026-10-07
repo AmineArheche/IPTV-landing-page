@@ -93,3 +93,18 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log(`Plan selected: ${plan} for ${price}`);
         });
     });
+
+    // FAQ Accordion Behavior
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.closest('.faq-item');
+            const isActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
