@@ -63,3 +63,23 @@ document.addEventListener('DOMContentLoaded', function() {
         statNumbers.forEach(stat => statsObserver.observe(stat));
     }
 });
+
+    // Channel filter tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const channelCards = document.querySelectorAll('.channel-card');
+    
+    tabButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            tabButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            const category = btn.getAttribute('data-category');
+            channelCards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
