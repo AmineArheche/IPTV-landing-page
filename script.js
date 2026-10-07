@@ -83,3 +83,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
+
+    // Pricing plan CTA handlers
+    const planButtons = document.querySelectorAll('.plan-btn');
+    planButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const plan = btn.getAttribute('data-plan') || 'Premium';
+            const price = btn.getAttribute('data-price') || '$14.99';
+            console.log(`Plan selected: ${plan} for ${price}`);
+        });
+    });
