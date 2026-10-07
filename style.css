@@ -589,3 +589,42 @@ body {
 .plan-features li.dimmed {
     color: var(--text-dim);
 }
+
+/* Comparison Matrix */
+.comparison {
+    padding: 5rem 0;
+}
+
+.comparison-table-wrapper {
+    overflow-x: auto;
+    border-radius: 18px;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-card);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.comparison-table th, .comparison-table td {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.95rem;
+}
+
+.comparison-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-white);
+    font-weight: 700;
+}
+
+.comparison-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.highlight-col {
+    color: var(--accent-light);
+    font-weight: 600;
+}
