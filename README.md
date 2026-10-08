@@ -66,3 +66,6 @@ Open your browser at `http://localhost:3000` to view the landing page.
 
 ## 📄 License
 This project is licensed under the MIT License.
+
+---
+*Crafted with ❤️ by Amine Arheche - Enterprise Grade IPTV Solution.*
