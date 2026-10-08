@@ -1,0 +1,28 @@
+name: CI / Static Code Quality & Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Verify Essential Project Files
+        run: |
+          test -f index.html && echo "index.html exists"
+          test -f style.css && echo "style.css exists"
+          test -f script.js && echo "script.js exists"
+          test -f support.html && echo "support.html exists"
+          test -f support.css && echo "support.css exists"
+          test -f support-chat.js && echo "support-chat.js exists"
