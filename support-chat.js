@@ -565,3 +565,12 @@ Need help finding a specific show? Let me know!`
 
     console.log('💬 AI Support Chat Initialized - StreamVault Pro');
 });
+
+
+// Automated Quick Reply Suggestions
+window.StreamVaultQuickReplies = [
+    "How to setup on Smart TV?",
+    "Do you offer a free 24h trial?",
+    "Supported payment methods",
+    "How fast should my internet be?"
+];
