@@ -253,6 +253,106 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCurrencyDisplay();
     }
 
+    // ===== INTERNATIONALIZATION (I18N) ENGINE =====
+    const langSelect = document.getElementById('langSelect');
+    const i18nDictionary = {
+        en: {
+            home: 'Home',
+            features: 'Features',
+            content: 'Content',
+            pricing: 'Pricing',
+            support: 'Support',
+            getStarted: 'Get Started',
+            heroSubtitle: 'Premium IPTV service with 4K quality, anti-freeze technology, and 99.9% uptime. Watch live sports, movies, series, and more on any device.',
+            startStreaming: 'Start Streaming Now',
+            viewContent: 'View Content'
+        },
+        fr: {
+            home: 'Accueil',
+            features: 'Fonctionnalités',
+            content: 'Catalogue',
+            pricing: 'Tarifs',
+            support: 'Support',
+            getStarted: 'Commencer',
+            heroSubtitle: 'Service IPTV premium en qualité 4K, technologie anti-coupure et disponibilité 99,9%. Regardez le sport en direct, films et séries.',
+            startStreaming: 'Commencer Maintenant',
+            viewContent: 'Voir le Catalogue'
+        },
+        es: {
+            home: 'Inicio',
+            features: 'Características',
+            content: 'Contenido',
+            pricing: 'Precios',
+            support: 'Soporte',
+            getStarted: 'Empezar',
+            heroSubtitle: 'Servicio IPTV premium con calidad 4K, tecnología anti-congelamiento y 99.9% de actividad. Deportes en vivo, películas y series.',
+            startStreaming: 'Ver Ahora Mismo',
+            viewContent: 'Ver Contenido'
+        },
+        ar: {
+            home: 'الرئيسية',
+            features: 'المميزات',
+            content: 'القنوات والأفلام',
+            pricing: 'الأسعار',
+            support: 'الدعم الفني',
+            getStarted: 'اشترك الآن',
+            heroSubtitle: 'خدمة IPTV ممتازة بجودة 4K مع تقنية منع التقطيع وبث مباشر بدون توقف. شاهد المباريات والأفلام والمسلسلات على أي جهاز.',
+            startStreaming: 'ابدأ البث الآن',
+            viewContent: 'تصفح المحتوى'
+        }
+    };
+
+    let currentLang = 'en';
+    try {
+        currentLang = localStorage.getItem('streamvault_lang') || 'en';
+    } catch (e) {}
+
+    function applyLanguage(lang) {
+        currentLang = lang;
+        try {
+            localStorage.setItem('streamvault_lang', lang);
+        } catch (e) {}
+
+        const dict = i18nDictionary[lang] || i18nDictionary.en;
+
+        if (lang === 'ar') {
+            document.documentElement.setAttribute('dir', 'rtl');
+            document.documentElement.setAttribute('lang', 'ar');
+        } else {
+            document.documentElement.setAttribute('dir', 'ltr');
+            document.documentElement.setAttribute('lang', lang);
+        }
+
+        const navLinks = document.querySelectorAll('.nav-links a');
+        if (navLinks.length >= 5) {
+            navLinks[0].textContent = dict.home;
+            navLinks[1].textContent = dict.features;
+            navLinks[2].textContent = dict.content;
+            navLinks[3].textContent = dict.pricing;
+            navLinks[4].textContent = dict.support;
+        }
+
+        const navCta = document.getElementById('navCtaBtn');
+        if (navCta) navCta.textContent = dict.getStarted;
+
+        const heroSub = document.querySelector('.hero-subtitle');
+        if (heroSub) heroSub.textContent = dict.heroSubtitle;
+
+        const heroBtn = document.querySelector('.hero-buttons .btn-primary span');
+        if (heroBtn) heroBtn.textContent = dict.startStreaming;
+
+        const contentBtn = document.querySelector('.hero-buttons .btn-secondary span');
+        if (contentBtn) contentBtn.textContent = dict.viewContent;
+    }
+
+    if (langSelect) {
+        langSelect.value = currentLang;
+        langSelect.addEventListener('change', (e) => {
+            applyLanguage(e.target.value);
+        });
+        applyLanguage(currentLang);
+    }
+
     // ===== PRICING BUTTON CLICK ANIMATION =====
     const planButtons = document.querySelectorAll('.plan-button');
     
