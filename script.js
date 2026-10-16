@@ -10,21 +10,35 @@ if ('serviceWorker' in navigator && window.location.protocol.startsWith('http'))
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // ===== NAVBAR SCROLL EFFECT =====
+    // ===== OPTIMIZED SCROLL HANDLER WITH R-A-F =====
     const navbar = document.querySelector('.navbar');
-    let lastScroll = 0;
+    const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    let isTicking = false;
     
     window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+        if (!isTicking) {
+            window.requestAnimationFrame(() => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+
+                // Smooth Parallax on Hero Content
+                if (hero && heroContent && currentScroll < hero.offsetHeight) {
+                    const parallaxSpeed = 0.35;
+                    heroContent.style.transform = `translate3d(0, ${currentScroll * parallaxSpeed}px, 0)`;
+                    heroContent.style.opacity = Math.max(0, 1 - (currentScroll / hero.offsetHeight) * 0.85);
+                }
+
+                isTicking = false;
+            });
+            isTicking = true;
         }
-        
-        lastScroll = currentScroll;
-    });
+    }, { passive: true });
 
     // ===== SMOOTH SCROLL FOR NAVIGATION =====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -310,22 +324,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 10);
         });
     }, 4000);
-
-    // ===== PARALLAX EFFECT ON HERO =====
-    const hero = document.querySelector('.hero');
-    const heroContent = document.querySelector('.hero-content');
-    
-    window.addEventListener('scroll', () => {
-        if (hero && window.pageYOffset < hero.offsetHeight) {
-            const scrolled = window.pageYOffset;
-            const parallaxSpeed = 0.5;
-            
-            if (heroContent) {
-                heroContent.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
-                heroContent.style.opacity = 1 - (scrolled / hero.offsetHeight) * 0.8;
-            }
-        }
-    });
 
     // ===== SECTION REVEAL ON SCROLL =====
     const sections = document.querySelectorAll('.features, .content-showcase, .pricing, .faq');
