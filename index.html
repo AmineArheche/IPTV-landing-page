@@ -117,7 +117,18 @@
                     <li><a href="#pricing">Pricing</a></li>
                     <li><a href="support.html">Support</a></li>
                 </ul>
-                <a href="#pricing" class="nav-cta">Get Started</a>
+                <div class="nav-actions">
+                    <div class="currency-selector" aria-label="Select Currency">
+                        <label for="currencySelect" class="sr-only">Currency</label>
+                        <select id="currencySelect" class="currency-dropdown" title="Change currency">
+                            <option value="USD" selected>USD ($)</option>
+                            <option value="EUR">EUR (€)</option>
+                            <option value="GBP">GBP (£)</option>
+                            <option value="CAD">CAD ($)</option>
+                        </select>
+                    </div>
+                    <a href="#pricing" class="nav-cta">Get Started</a>
+                </div>
             </div>
         </div>
     </nav>

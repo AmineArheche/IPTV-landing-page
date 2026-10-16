@@ -179,18 +179,79 @@ document.addEventListener('DOMContentLoaded', function() {
             tab.classList.add('active');
             const period = tab.getAttribute('data-billing');
             if (pricingData[period]) {
-                if (starterAmount && starterPeriod) {
-                    starterAmount.textContent = pricingData[period].starter.amount;
-                    starterPeriod.textContent = pricingData[period].starter.period;
-                }
-                if (proAmount && proPeriod) {
-                    proAmount.textContent = pricingData[period].pro.amount;
-                    proPeriod.textContent = pricingData[period].pro.period;
-                    if (proSubtitle) proSubtitle.textContent = pricingData[period].pro.sub;
-                }
+                if (starterPeriod) starterPeriod.textContent = pricingData[period].starter.period;
+                if (proPeriod) proPeriod.textContent = pricingData[period].pro.period;
+                if (proSubtitle) proSubtitle.textContent = pricingData[period].pro.sub;
+                updateCurrencyDisplay();
             }
         });
     });
+
+    // ===== MULTI-CURRENCY CONVERTER SYSTEM =====
+    const currencySelect = document.getElementById('currencySelect');
+    const currencySymbols = {
+        USD: '$',
+        EUR: '€',
+        GBP: '£',
+        CAD: 'CA$'
+    };
+    const exchangeRates = {
+        USD: 1.0,
+        EUR: 0.92,
+        GBP: 0.79,
+        CAD: 1.36
+    };
+
+    let currentCurrency = 'USD';
+    try {
+        currentCurrency = localStorage.getItem('streamvault_currency') || 'USD';
+    } catch (e) {
+        currentCurrency = 'USD';
+    }
+
+    if (currencySelect) {
+        currencySelect.value = currentCurrency;
+    }
+
+    function updateCurrencyDisplay() {
+        const rate = exchangeRates[currentCurrency] || 1.0;
+        const symbol = currencySymbols[currentCurrency] || '$';
+
+        document.querySelectorAll('.currency').forEach(el => {
+            el.textContent = symbol;
+        });
+
+        const activeTab = document.querySelector('.billing-tab.active');
+        const period = activeTab ? activeTab.getAttribute('data-billing') : 'monthly';
+        
+        if (pricingData[period]) {
+            const rawStarter = parseFloat(pricingData[period].starter.amount);
+            const rawPro = parseFloat(pricingData[period].pro.amount);
+            
+            if (starterAmount) {
+                starterAmount.textContent = (rawStarter * rate).toFixed(2);
+            }
+            if (proAmount) {
+                proAmount.textContent = (rawPro * rate).toFixed(2);
+            }
+        }
+
+        const lifetimeEl = document.querySelector('.pricing-card:last-child .amount');
+        if (lifetimeEl) {
+            lifetimeEl.textContent = (299.99 * rate).toFixed(2);
+        }
+    }
+
+    if (currencySelect) {
+        currencySelect.addEventListener('change', (e) => {
+            currentCurrency = e.target.value;
+            try {
+                localStorage.setItem('streamvault_currency', currentCurrency);
+            } catch (err) {}
+            updateCurrencyDisplay();
+        });
+        updateCurrencyDisplay();
+    }
 
     // ===== PRICING BUTTON CLICK ANIMATION =====
     const planButtons = document.querySelectorAll('.plan-button');
