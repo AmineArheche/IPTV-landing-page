@@ -1,4 +1,13 @@
 // Modern IPTV Store - Enhanced JavaScript with Premium Animations
+// Service Worker Registration for Offline Support
+if ('serviceWorker' in navigator && window.location.protocol.startsWith('http')) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch(err => {
+            console.debug('ServiceWorker registration optional notice:', err);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     
     // ===== NAVBAR SCROLL EFFECT =====
