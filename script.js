@@ -150,6 +150,48 @@ document.addEventListener('DOMContentLoaded', function() {
         pricingObserver.observe(card);
     });
 
+    // ===== BILLING FREQUENCY SWITCHER =====
+    const billingTabs = document.querySelectorAll('.billing-tab');
+    const starterAmount = document.getElementById('starterAmount');
+    const starterPeriod = document.getElementById('starterPeriod');
+    const proAmount = document.getElementById('proAmount');
+    const proPeriod = document.getElementById('proPeriod');
+    const proSubtitle = document.getElementById('proSubtitle');
+
+    const pricingData = {
+        monthly: {
+            starter: { amount: '19.99', period: '/month' },
+            pro: { amount: '29.99', period: '/month', sub: 'Billed monthly • Cancel anytime' }
+        },
+        quarterly: {
+            starter: { amount: '47.99', period: '/3 months' },
+            pro: { amount: '69.99', period: '/3 months', sub: 'Save 20% compared to monthly' }
+        },
+        yearly: {
+            starter: { amount: '119.99', period: '/year' },
+            pro: { amount: '149.99', period: '/year', sub: 'Best Value! Save 50% with annual billing' }
+        }
+    };
+
+    billingTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            billingTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            const period = tab.getAttribute('data-billing');
+            if (pricingData[period]) {
+                if (starterAmount && starterPeriod) {
+                    starterAmount.textContent = pricingData[period].starter.amount;
+                    starterPeriod.textContent = pricingData[period].starter.period;
+                }
+                if (proAmount && proPeriod) {
+                    proAmount.textContent = pricingData[period].pro.amount;
+                    proPeriod.textContent = pricingData[period].pro.period;
+                    if (proSubtitle) proSubtitle.textContent = pricingData[period].pro.sub;
+                }
+            }
+        });
+    });
+
     // ===== PRICING BUTTON CLICK ANIMATION =====
     const planButtons = document.querySelectorAll('.plan-button');
     

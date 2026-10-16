@@ -494,17 +494,26 @@
                 <span class="section-tag">Simple Pricing</span>
                 <h2 class="section-title">Choose Your Plan</h2>
                 <p class="section-subtitle">All plans include full access to our entire content library</p>
+                
+                <!-- Interactive Billing Switcher -->
+                <div class="billing-toggle-container">
+                    <div class="billing-toggle" role="group" aria-label="Billing frequency selection">
+                        <button type="button" class="billing-tab active" data-billing="monthly">Monthly</button>
+                        <button type="button" class="billing-tab" data-billing="quarterly">Quarterly <span class="discount-pill">Save 20%</span></button>
+                        <button type="button" class="billing-tab" data-billing="yearly">Yearly <span class="discount-pill highlight">Save 50%</span></button>
+                    </div>
+                </div>
             </div>
             <div class="pricing-grid">
-                <div class="pricing-card">
+                <div class="pricing-card" id="starterPlan" data-price-monthly="19.99" data-price-quarterly="47.99" data-price-yearly="119.99">
                     <div class="plan-header">
-                        <h3>Monthly</h3>
-                        <p>Perfect for trying out</p>
+                        <h3 class="plan-title-text">Starter Plan</h3>
+                        <p class="plan-subtitle-text">Perfect for single screen viewing</p>
                     </div>
                     <div class="plan-price">
                         <span class="currency">$</span>
-                        <span class="amount">19.99</span>
-                        <span class="period">/month</span>
+                        <span class="amount" id="starterAmount">19.99</span>
+                        <span class="period" id="starterPeriod">/month</span>
                     </div>
                     <ul class="plan-features">
                         <li>
@@ -541,18 +550,18 @@
                     <a href="#" class="plan-button">Get Started</a>
                 </div>
 
-                <div class="pricing-card featured">
+                <div class="pricing-card featured" id="proPlan" data-price-monthly="29.99" data-price-quarterly="69.99" data-price-yearly="119.99">
                     <div class="popular-badge">MOST POPULAR</div>
                     <div class="plan-header">
-                        <h3>Yearly</h3>
-                        <p>Best value - Save 50%</p>
+                        <h3 class="plan-title-text">Ultra Pro Plan</h3>
+                        <p class="plan-subtitle-text" id="proSubtitle">Best value - Save 50% with annual billing</p>
                     </div>
                     <div class="plan-price">
                         <span class="currency">$</span>
-                        <span class="amount">119.99</span>
-                        <span class="period">/year</span>
+                        <span class="amount" id="proAmount">29.99</span>
+                        <span class="period" id="proPeriod">/month</span>
                     </div>
-                    <div class="savings">Save $120/year</div>
+                    <div class="savings" id="proSavings">Included: 2 multi-room connections</div>
                     <ul class="plan-features">
                         <li>
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
