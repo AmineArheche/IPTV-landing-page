@@ -600,6 +600,199 @@ body {
     text-overflow: ellipsis;
 }
 
+/* Live Channel Lineup & Finder */
+.channel-finder-section {
+    margin-top: 64px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 36px;
+    backdrop-filter: blur(16px);
+}
+
+.channel-finder-subtitle {
+    color: var(--gray-light);
+    font-size: 15px;
+    margin-top: 4px;
+    margin-bottom: 24px;
+}
+
+.channel-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 28px;
+}
+
+.channel-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.channel-search-box .search-icon {
+    position: absolute;
+    left: 18px;
+    color: var(--gray);
+    pointer-events: none;
+}
+
+.channel-search-box input {
+    width: 100%;
+    padding: 14px 44px 14px 48px;
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    color: var(--white);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.channel-search-box input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+    background: rgba(30, 41, 59, 0.95);
+}
+
+.clear-search-btn {
+    position: absolute;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: var(--gray);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.clear-search-btn:hover {
+    color: var(--white);
+}
+
+.channel-filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.channel-chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--gray-light);
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.channel-chip:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+
+.channel-chip.active {
+    background: var(--gradient);
+    color: var(--white);
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.channel-results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.channel-card-item {
+    background: rgba(30, 41, 59, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.channel-card-item:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.4);
+    background: rgba(30, 41, 59, 0.9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.channel-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.channel-logo-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--gradient-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.channel-quality-badge {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 3px 6px;
+    border-radius: 6px;
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.channel-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.channel-cat-label {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+.channel-preview-btn {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary-light);
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    padding: 6px 10px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.channel-card-item:hover .channel-preview-btn {
+    background: var(--primary);
+    color: var(--white);
+}
+
+.channel-results-empty {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray-light);
+    font-size: 16px;
+}
+
 /* Pricing Section */
 .pricing {
     padding: 120px 0;

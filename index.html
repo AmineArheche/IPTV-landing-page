@@ -495,6 +495,39 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Live Channel Lineup & Real-Time Filter -->
+            <div class="channel-finder-section">
+                <div class="channel-finder-header">
+                    <h3 class="category-title">Live Channel Lineup (20,000+ Channels)</h3>
+                    <p class="channel-finder-subtitle">Instant search & sample any network before subscribing</p>
+                </div>
+                
+                <div class="channel-controls">
+                    <div class="channel-search-box">
+                        <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M9 17A8 8 0 109 1a8 8 0 000 16zM19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" id="channelSearchInput" placeholder="Search channels (e.g. ESPN, Sky Sports, HBO, beIN, CNN, Disney...)" aria-label="Search Live Channels">
+                        <button type="button" id="clearChannelSearch" class="clear-search-btn" title="Clear search" style="display: none;">&times;</button>
+                    </div>
+                    <div class="channel-filter-chips" role="group" aria-label="Filter channels by category">
+                        <button class="channel-chip active" data-cat="all">All (20K+)</button>
+                        <button class="channel-chip" data-cat="sports">⚽ Sports & PPV</button>
+                        <button class="channel-chip" data-cat="movies">🎬 Movies & Cinema</button>
+                        <button class="channel-chip" data-cat="news">📰 News & Finance</button>
+                        <button class="channel-chip" data-cat="kids">🧸 Kids & Family</button>
+                        <button class="channel-chip" data-cat="documentary">🌍 Documentaries</button>
+                    </div>
+                </div>
+
+                <div class="channel-results-grid" id="channelResultsGrid">
+                    <!-- Populated dynamically via JS -->
+                </div>
+                <div class="channel-results-empty" id="channelEmptyMsg" style="display: none;">
+                    <p>🔍 No channels matching your search. Try searching for "Sports", "HBO", "Sky", or "beIN".</p>
+                </div>
+            </div>
         </div>
     </section>
 

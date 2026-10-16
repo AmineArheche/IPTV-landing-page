@@ -357,6 +357,108 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // ===== LIVE CHANNEL FINDER & SEARCH FILTER =====
+    const channelSearchInput = document.getElementById('channelSearchInput');
+    const clearChannelSearch = document.getElementById('clearChannelSearch');
+    const channelChips = document.querySelectorAll('.channel-chip');
+    const channelResultsGrid = document.getElementById('channelResultsGrid');
+    const channelEmptyMsg = document.getElementById('channelEmptyMsg');
+
+    const sampleChannels = [
+        { name: 'Sky Sports Main Event', category: 'sports', icon: '⚽', quality: '4K 60FPS', country: 'UK' },
+        { name: 'ESPN & ESPN 2 HD', category: 'sports', icon: '🏀', quality: '4K UHD', country: 'US' },
+        { name: 'beIN Sports 1 Premium', category: 'sports', icon: '🏆', quality: '4K 60FPS', country: 'FR/AR' },
+        { name: 'TNT Sports 1 & 2', category: 'sports', icon: '🥊', quality: '4K UHD', country: 'UK' },
+        { name: 'Formula 1 TV Pro Live', category: 'sports', icon: '🏎️', quality: '4K 60FPS', country: 'GLOBAL' },
+        { name: 'UFC Fight Pass Live', category: 'sports', icon: '🥋', quality: '4K UHD', country: 'US' },
+        { name: 'HBO HD East & West', category: 'movies', icon: '🎬', quality: '4K HDR', country: 'US' },
+        { name: 'Canal+ Cinéma 4K', category: 'movies', icon: '🍿', quality: '4K UHD', country: 'FR' },
+        { name: 'Sky Cinema Premiere', category: 'movies', icon: '🎥', quality: '4K HDR', country: 'UK' },
+        { name: 'BBC News HD', category: 'news', icon: '📰', quality: '1080P', country: 'UK' },
+        { name: 'CNN International', category: 'news', icon: '🌐', quality: '1080P', country: 'US' },
+        { name: 'Sky News HD', category: 'news', icon: '📡', quality: '1080P', country: 'UK' },
+        { name: 'Disney Channel HD', category: 'kids', icon: '🧸', quality: '1080P', country: 'US' },
+        { name: 'Cartoon Network Live', category: 'kids', icon: '🎨', quality: '1080P', country: 'US' },
+        { name: 'Discovery Channel 4K', category: 'documentary', icon: '🌍', quality: '4K UHD', country: 'US' },
+        { name: 'National Geographic HD', category: 'documentary', icon: '🦁', quality: '4K HDR', country: 'US' }
+    ];
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+    let debounceTimer = null;
+
+    function renderChannels() {
+        if (!channelResultsGrid) return;
+        const filtered = sampleChannels.filter(channel => {
+            const matchesCat = activeCategory === 'all' || channel.category === activeCategory;
+            const matchesSearch = !searchQuery || 
+                channel.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                channel.country.toLowerCase().includes(searchQuery.toLowerCase());
+            return matchesCat && matchesSearch;
+        });
+
+        channelResultsGrid.innerHTML = '';
+        if (filtered.length === 0) {
+            if (channelEmptyMsg) channelEmptyMsg.style.display = 'block';
+        } else {
+            if (channelEmptyMsg) channelEmptyMsg.style.display = 'none';
+            filtered.forEach(ch => {
+                const card = document.createElement('div');
+                card.className = 'channel-card-item';
+                card.setAttribute('data-channel', ch.name);
+                card.setAttribute('data-quality', ch.quality);
+                card.innerHTML = `
+                    <div class="channel-card-top">
+                        <div class="channel-logo-badge">${ch.icon}</div>
+                        <span class="channel-quality-badge">${ch.quality}</span>
+                    </div>
+                    <div>
+                        <div class="channel-name">${ch.name}</div>
+                        <div class="channel-cat-label">${ch.country} • ${ch.category.toUpperCase()}</div>
+                    </div>
+                    <div class="channel-preview-btn">
+                        <span>▶ Preview Stream</span>
+                    </div>
+                `;
+                channelResultsGrid.appendChild(card);
+            });
+        }
+    }
+
+    if (channelSearchInput) {
+        channelSearchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                searchQuery = e.target.value.trim();
+                if (clearChannelSearch) {
+                    clearChannelSearch.style.display = searchQuery ? 'block' : 'none';
+                }
+                renderChannels();
+            }, 180);
+        });
+    }
+
+    if (clearChannelSearch) {
+        clearChannelSearch.addEventListener('click', () => {
+            channelSearchInput.value = '';
+            searchQuery = '';
+            clearChannelSearch.style.display = 'none';
+            channelSearchInput.focus();
+            renderChannels();
+        });
+    }
+
+    channelChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            channelChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            activeCategory = chip.getAttribute('data-cat') || 'all';
+            renderChannels();
+        });
+    });
+
+    renderChannels();
+
     // ===== SOCIAL PROOF NOTIFICATIONS =====
     const notifications = [
         { name: "James", location: "New York", action: "subscribed to Yearly Plan" },
