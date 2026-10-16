@@ -408,7 +408,53 @@ Need help finding a specific show? Let me know!`
             : fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
     }
 
-    // Add message to chat
+    // HTML Sanitization to prevent XSS attacks
+    function escapeHTML(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    // Markdown Parser for structured bot messages
+    function formatMarkdown(rawText) {
+        if (!rawText) return '';
+        const escaped = escapeHTML(rawText);
+        // Format bold text **bold**
+        let formatted = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+        const lines = formatted.split('\n');
+        let inList = false;
+        const htmlLines = [];
+
+        for (const line of lines) {
+            const trimmed = line.trim();
+            if (trimmed.startsWith('• ') || trimmed.startsWith('- ') || /^\d+\.\s/.test(trimmed)) {
+                const itemText = trimmed.replace(/^[•\-\d+\.]\s*/, '');
+                if (!inList) {
+                    htmlLines.push('<ul class="chat-list">');
+                    inList = true;
+                }
+                htmlLines.push(`<li>${itemText}</li>`);
+            } else {
+                if (inList) {
+                    htmlLines.push('</ul>');
+                    inList = false;
+                }
+                if (trimmed.length > 0) {
+                    htmlLines.push(`<p>${line}</p>`);
+                }
+            }
+        }
+        if (inList) {
+            htmlLines.push('</ul>');
+        }
+        return htmlLines.join('');
+    }
+
+    // Add message to chat safely
     function addMessage(text, isUser = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `message ${isUser ? 'user-message' : 'agent-message'}`;
@@ -424,7 +470,7 @@ Need help finding a specific show? Let me know!`
                 <div class="message-avatar">U</div>
                 <div class="message-content">
                     <div class="message-text">
-                        <p>${text}</p>
+                        <p>${escapeHTML(text)}</p>
                     </div>
                     <div class="message-time">${currentTime}</div>
                 </div>
@@ -440,7 +486,7 @@ Need help finding a specific show? Let me know!`
                 </div>
                 <div class="message-content">
                     <div class="message-text">
-                        ${text.split('\n').map(line => `<p>${line}</p>`).join('')}
+                        ${formatMarkdown(text)}
                     </div>
                     <div class="message-time">${currentTime}</div>
                 </div>
