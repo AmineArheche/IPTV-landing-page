@@ -787,6 +787,63 @@
             </div>
         </div>
     </section>
+
+    <!-- Streaming Player Preview Modal -->
+    <div id="playerModal" class="player-modal" role="dialog" aria-modal="true" aria-labelledby="playerTitle" style="display: none;">
+        <div class="player-backdrop" id="playerBackdrop"></div>
+        <div class="player-dialog">
+            <div class="player-header">
+                <div class="player-title-box">
+                    <span class="live-indicator-dot"></span>
+                    <h3 id="playerTitle" class="player-title">Sky Sports Main Event</h3>
+                    <span id="playerQualityBadge" class="player-badge">4K 60FPS</span>
+                </div>
+                <button type="button" class="player-close-btn" id="playerCloseBtn" aria-label="Close Stream Preview">&times;</button>
+            </div>
+            
+            <div class="player-screen-wrapper">
+                <div class="player-screen" id="playerScreen">
+                    <div class="stream-overlay-watermark">
+                        <span>StreamVault<span class="pro">PRO</span> • LIVE FEED</span>
+                    </div>
+                    <div class="stream-visualizer">
+                        <div class="stream-center-pulse">
+                            <span class="play-state-icon">▶</span>
+                        </div>
+                        <div class="stream-stats-overlay">
+                            <span>Bitrate: 24.8 Mbps</span>
+                            <span>Latency: 14ms</span>
+                            <span>Codec: H.265 / HEVC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="player-controls-bar">
+                <div class="player-controls-left">
+                    <button type="button" class="p-btn" id="pPlayToggle" title="Play or Pause">⏸ Pause</button>
+                    <button type="button" class="p-btn" id="pMuteToggle" title="Toggle Audio">🔊 Sound ON</button>
+                    <span class="player-server-tag">⚡ Edge Server: US-East #04</span>
+                </div>
+                <div class="player-controls-right">
+                    <select class="p-select" id="pQualitySelect" title="Select Quality">
+                        <option value="4K">4K UHD (60fps)</option>
+                        <option value="1080p">1080p Full HD</option>
+                        <option value="720p">720p HD</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="player-footer">
+                <div class="player-footer-text">
+                    <strong>Sample streaming session active.</strong> Enjoy 20,000+ live TV channels and 100,000+ VOD in stunning 4K.
+                </div>
+                <a href="#pricing" class="btn btn-primary player-cta-btn" id="playerCtaBtn">
+                    <span>Unlock Full Subscription</span>
+                </a>
+            </div>
+        </div>
+    </div>
     </main>
 
     <!-- Footer -->

@@ -459,7 +459,91 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderChannels();
 
-    // ===== SOCIAL PROOF NOTIFICATIONS =====
+    // ===== STREAMING PLAYER PREVIEW MODAL =====
+    const playerModal = document.getElementById('playerModal');
+    const playerBackdrop = document.getElementById('playerBackdrop');
+    const playerCloseBtn = document.getElementById('playerCloseBtn');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerQualityBadge = document.getElementById('playerQualityBadge');
+    const pPlayToggle = document.getElementById('pPlayToggle');
+    const pMuteToggle = document.getElementById('pMuteToggle');
+    const pQualitySelect = document.getElementById('pQualitySelect');
+    const playerCtaBtn = document.getElementById('playerCtaBtn');
+
+    let isPlaying = true;
+    let isMuted = false;
+
+    function openPlayerModal(channelName, quality) {
+        if (!playerModal) return;
+        if (playerTitle) playerTitle.textContent = channelName || 'Live Channel Stream';
+        if (playerQualityBadge) playerQualityBadge.textContent = quality || '4K 60FPS';
+        playerModal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePlayerModal() {
+        if (!playerModal) return;
+        playerModal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+
+    if (channelResultsGrid) {
+        channelResultsGrid.addEventListener('click', (e) => {
+            const card = e.target.closest('.channel-card-item');
+            if (card) {
+                const name = card.getAttribute('data-channel');
+                const quality = card.getAttribute('data-quality');
+                openPlayerModal(name, quality);
+            }
+        });
+    }
+
+    document.querySelectorAll('.content-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const titleEl = card.querySelector('.card-title');
+            const title = titleEl ? titleEl.textContent : 'VOD Stream Sample';
+            openPlayerModal(title, '4K UHD HDR');
+        });
+    });
+
+    if (playerCloseBtn) playerCloseBtn.addEventListener('click', closePlayerModal);
+    if (playerBackdrop) playerBackdrop.addEventListener('click', closePlayerModal);
+
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && playerModal && playerModal.style.display === 'flex') {
+            closePlayerModal();
+        }
+    });
+
+    if (pPlayToggle) {
+        pPlayToggle.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            pPlayToggle.textContent = isPlaying ? '⏸ Pause' : '▶ Play';
+            const pulse = document.querySelector('.stream-center-pulse');
+            if (pulse) pulse.style.opacity = isPlaying ? '1' : '0.4';
+        });
+    }
+
+    if (pMuteToggle) {
+        pMuteToggle.addEventListener('click', () => {
+            isMuted = !isMuted;
+            pMuteToggle.textContent = isMuted ? '🔇 Sound OFF' : '🔊 Sound ON';
+        });
+    }
+
+    if (pQualitySelect) {
+        pQualitySelect.addEventListener('change', (e) => {
+            if (playerQualityBadge) {
+                playerQualityBadge.textContent = e.target.value + ' LIVE';
+            }
+        });
+    }
+
+    if (playerCtaBtn) {
+        playerCtaBtn.addEventListener('click', () => {
+            closePlayerModal();
+        });
+    }
     const notifications = [
         { name: "James", location: "New York", action: "subscribed to Yearly Plan" },
         { name: "Sarah", location: "Los Angeles", action: "started streaming in 4K" },
