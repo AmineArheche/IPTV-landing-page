@@ -524,6 +524,9 @@ Need help finding a specific show? Let me know!`
         const userMessage = messageInput.value.trim();
         if (!userMessage) return;
 
+        // Play send chime
+        playChime(true);
+
         // Add user message
         addMessage(userMessage, true);
         messageInput.value = '';
@@ -538,8 +541,70 @@ Need help finding a specific show? Let me know!`
             hideTyping();
             const response = findBestResponse(userMessage);
             addMessage(response, false);
+            playChime(false);
         }, thinkingTime);
     });
+
+    // ===== AUDIO CHIME SYNTHESIZER =====
+    let soundEnabled = true;
+    const toggleSoundBtn = document.getElementById('toggleSound');
+    const soundIcon = document.getElementById('soundIcon');
+
+    function playChime(isSend = true) {
+        if (!soundEnabled) return;
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.type = 'sine';
+            const freq = isSend ? 587.33 : 880;
+            osc.frequency.setValueAtTime(freq, ctx.currentTime);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.25);
+        } catch (e) {}
+    }
+
+    if (toggleSoundBtn) {
+        toggleSoundBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            if (soundIcon) soundIcon.textContent = soundEnabled ? '🔔' : '🔕';
+            toggleSoundBtn.title = soundEnabled ? 'Audio Chimes Enabled' : 'Audio Chimes Muted';
+        });
+    }
+
+    // ===== EXPORT CHAT TRANSCRIPT =====
+    const exportChatBtn = document.getElementById('exportChat');
+    if (exportChatBtn) {
+        exportChatBtn.addEventListener('click', () => {
+            if (conversationHistory.length === 0) {
+                alert('No chat messages to export yet.');
+                return;
+            }
+            let transcriptText = `StreamVault Pro Support Chat Transcript\n`;
+            transcriptText += `Exported: ${new Date().toLocaleString()}\n`;
+            transcriptText += `=========================================\n\n`;
+
+            conversationHistory.forEach(msg => {
+                const speaker = msg.isUser ? 'USER' : 'STREAMVAULT AI AGENT';
+                const time = msg.timestamp ? new Date(msg.timestamp).toLocaleTimeString() : '';
+                transcriptText += `[${time}] ${speaker}:\n${msg.text}\n\n`;
+            });
+
+            const blob = new Blob([transcriptText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `streamvault-support-${Date.now()}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    }
 
     // Handle topic buttons
     topicButtons.forEach(btn => {
