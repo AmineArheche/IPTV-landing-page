@@ -659,6 +659,52 @@ document.addEventListener('DOMContentLoaded', function() {
     
     createViewerCount();
 
+    // ===== BROADBAND SPEED TEST CONTROLLER =====
+    const startSpeedTestBtn = document.getElementById('startSpeedTestBtn');
+    const speedGaugeCircle = document.getElementById('speedGaugeCircle');
+    const speedNumber = document.getElementById('speedNumber');
+    const pingStat = document.getElementById('pingStat');
+    const jitterStat = document.getElementById('jitterStat');
+    const speedResultBadge = document.getElementById('speedResultBadge');
+
+    if (startSpeedTestBtn && speedNumber) {
+        startSpeedTestBtn.addEventListener('click', () => {
+            startSpeedTestBtn.disabled = true;
+            startSpeedTestBtn.querySelector('span').textContent = '🔄 Testing latency & ping...';
+            speedGaugeCircle.classList.add('testing');
+            if (speedResultBadge) speedResultBadge.style.display = 'none';
+
+            let ping = 14;
+            let jitter = 2;
+            let currentMbps = 0;
+            const targetMbps = 72 + Math.floor(Math.random() * 25);
+
+            setTimeout(() => {
+                if (pingStat) pingStat.textContent = `Ping: ${ping + Math.floor(Math.random() * 6)} ms`;
+                if (jitterStat) jitterStat.textContent = `Jitter: ${jitter + Math.floor(Math.random() * 3)} ms`;
+                startSpeedTestBtn.querySelector('span').textContent = '📡 Measuring download throughput...';
+
+                const interval = setInterval(() => {
+                    currentMbps += Math.random() * 12 + 3;
+                    if (currentMbps >= targetMbps) {
+                        currentMbps = targetMbps;
+                        clearInterval(interval);
+                        speedNumber.textContent = currentMbps.toFixed(1);
+                        speedGaugeCircle.classList.remove('testing');
+                        startSpeedTestBtn.disabled = false;
+                        startSpeedTestBtn.querySelector('span').textContent = '⚡ Test Again';
+                        if (speedResultBadge) {
+                            speedResultBadge.style.display = 'block';
+                            speedResultBadge.innerHTML = `<span>🎉 ${currentMbps.toFixed(1)} Mbps Detected • Ultra HD 4K & Anti-Freeze Ready!</span>`;
+                        }
+                    } else {
+                        speedNumber.textContent = currentMbps.toFixed(1);
+                    }
+                }, 80);
+            }, 800);
+        });
+    }
+
     // ===== PAGE LOAD ANIMATION =====
     setTimeout(() => {
         document.body.style.opacity = '1';

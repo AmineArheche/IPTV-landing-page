@@ -265,6 +265,51 @@
         </div>
     </section>
 
+    <!-- Speed Test & Streaming Readiness Section -->
+    <section class="speedtest-section" id="speedtest">
+        <div class="container">
+            <div class="speedtest-card">
+                <div class="speedtest-info">
+                    <span class="section-tag">Streaming Readiness</span>
+                    <h2>Check Your Connection Speed</h2>
+                    <p>Make sure your broadband is primed for 4K 60FPS anti-freeze streaming. StreamVault Pro automatically optimizes bitrates to match your network speed.</p>
+                    <div class="speedtest-benchmarks">
+                        <div class="bench-item">
+                            <span class="bench-val">10+ Mbps</span>
+                            <span class="bench-lbl">HD 1080p Ready</span>
+                        </div>
+                        <div class="bench-item">
+                            <span class="bench-val">25+ Mbps</span>
+                            <span class="bench-lbl">4K UHD Certified</span>
+                        </div>
+                        <div class="bench-item">
+                            <span class="bench-val">&lt; 35 ms</span>
+                            <span class="bench-lbl">Zero Lag / Anti-Freeze</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="speedtest-gauge-box">
+                    <div class="gauge-display">
+                        <div class="gauge-circle" id="speedGaugeCircle">
+                            <span class="gauge-number" id="speedNumber">--</span>
+                            <span class="gauge-unit">Mbps</span>
+                        </div>
+                        <div class="gauge-stats" id="gaugeStats">
+                            <span id="pingStat">Ping: -- ms</span> • <span id="jitterStat">Jitter: -- ms</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary speedtest-btn" id="startSpeedTestBtn">
+                        <span>⚡ Test My Speed Now</span>
+                    </button>
+                    <div class="speedtest-result-badge" id="speedResultBadge" style="display: none;">
+                        <span>🎉 Outstanding Connection! 4K HDR & Multi-Screen Ready.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Content Showcase Section -->
     <section id="content" class="content-showcase">
         <div class="container">
