@@ -609,6 +609,43 @@ Need help finding a specific show? Let me know!`
         }
     });
 
+    // ===== SUPPORT TICKET STATUS TRACKER =====
+    const ticketLookupInput = document.getElementById('ticketLookupInput');
+    const lookupTicketBtn = document.getElementById('lookupTicketBtn');
+    const ticketResultCard = document.getElementById('ticketResultCard');
+
+    if (lookupTicketBtn && ticketLookupInput && ticketResultCard) {
+        lookupTicketBtn.addEventListener('click', () => {
+            const rawId = ticketLookupInput.value.trim().toUpperCase() || 'TK-8820';
+            ticketResultCard.style.display = 'block';
+            ticketResultCard.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <strong style="color: white;">Ticket #${escapeHTML(rawId)}</strong>
+                    <span style="color: #10b981; font-weight: 700;">IN PROGRESS</span>
+                </div>
+                <div style="margin-bottom: 8px;">Category: 4K Stream Diagnostics & M3U Routing</div>
+                <div class="ticket-timeline">
+                    <div class="timeline-step done">
+                        <span>✔</span>
+                        <span>Ticket Received & Verified</span>
+                    </div>
+                    <div class="timeline-step done">
+                        <span>✔</span>
+                        <span>Automated Network Diagnostic Pass</span>
+                    </div>
+                    <div class="timeline-step current">
+                        <span>●</span>
+                        <span>Assigned to Tier-2 IPTV Support Engineer</span>
+                    </div>
+                    <div class="timeline-step">
+                        <span style="color: #64748b;">○</span>
+                        <span style="color: #64748b;">Final Quality Sign-off & Resolution</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
     console.log('💬 AI Support Chat Initialized - StreamVault Pro');
 });
 

@@ -747,3 +747,104 @@
         box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     }
 }
+
+/* Support Ticket Tracker Widget */
+.ticket-tracker-box {
+    margin-top: 24px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 18px;
+}
+
+.ticket-tracker-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.ticket-tracker-header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.ticket-badge {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--primary-light);
+    font-size: 9px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.ticket-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.ticket-input-row input {
+    flex: 1;
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    padding: 8px 12px;
+    color: var(--white);
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.ticket-input-row input:focus {
+    border-color: var(--primary);
+}
+
+.ticket-track-btn {
+    background: var(--gradient);
+    border: none;
+    color: var(--white);
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.ticket-track-btn:hover {
+    transform: scale(1.05);
+}
+
+.ticket-result-card {
+    margin-top: 14px;
+    background: rgba(30, 41, 59, 0.9);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 12px;
+    color: var(--gray-light);
+}
+
+.ticket-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.timeline-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.timeline-step.done span:first-child {
+    color: var(--success);
+}
+
+.timeline-step.current span:first-child {
+    color: #f59e0b;
+    animation: live-blink 1.2s infinite;
+}

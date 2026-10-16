@@ -151,6 +151,19 @@
                         </button>
                     </div>
 
+                    <!-- Ticket Status Tracker Widget -->
+                    <div class="ticket-tracker-box">
+                        <div class="ticket-tracker-header">
+                            <span class="ticket-badge">STATUS CHECK</span>
+                            <h4>Track Support Ticket</h4>
+                        </div>
+                        <div class="ticket-input-row">
+                            <input type="text" id="ticketLookupInput" placeholder="Enter Ticket (e.g. TK-8820)" aria-label="Enter Ticket ID">
+                            <button type="button" id="lookupTicketBtn" class="ticket-track-btn">Track</button>
+                        </div>
+                        <div id="ticketResultCard" class="ticket-result-card" style="display: none;"></div>
+                    </div>
+
                     <div class="sidebar-footer">
                         <div class="support-hours">
                             <div class="status-indicator"></div>
