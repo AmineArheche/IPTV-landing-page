@@ -13,16 +13,32 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js Environment
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
       - name: Verify Essential Project Files
         run: |
-          test -f index.html && echo "index.html exists"
-          test -f style.css && echo "style.css exists"
-          test -f script.js && echo "script.js exists"
-          test -f support.html && echo "support.html exists"
-          test -f support.css && echo "support.css exists"
-          test -f support-chat.js && echo "support-chat.js exists"
+          test -f index.html && echo "✔ index.html verified"
+          test -f style.css && echo "✔ style.css verified"
+          test -f script.js && echo "✔ script.js verified"
+          test -f support.html && echo "✔ support.html verified"
+          test -f support.css && echo "✔ support.css verified"
+          test -f support-chat.js && echo "✔ support-chat.js verified"
+          test -f sw.js && echo "✔ sw.js verified"
+          test -f manifest.json && echo "✔ manifest.json verified"
+          test -f robots.txt && echo "✔ robots.txt verified"
+          test -f sitemap.xml && echo "✔ sitemap.xml verified"
+
+      - name: Verify JavaScript Syntax & Compilation
+        run: |
+          node -c script.js
+          node -c support-chat.js
+          node -c sw.js
+          node -c test/run-tests.js
+          echo "✔ All JavaScript syntax checks passed."
+
+      - name: Execute Automated Test Suite
+        run: |
+          node test/run-tests.js
