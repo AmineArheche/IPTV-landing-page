@@ -705,6 +705,113 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // ===== DEVICE SETUP GUIDE WIZARD =====
+    const deviceTabBtns = document.querySelectorAll('.device-tab-btn');
+    const deviceGuideContent = document.getElementById('deviceGuideContent');
+
+    const deviceGuides = {
+        firestick: {
+            app: 'IPTV Smarters Pro & TiviMate',
+            badge: 'Recommended App',
+            m3u: 'http://sv-pro.stream:8080/get.php?username=YOUR_USER&password=YOUR_PASS&type=m3u_plus',
+            steps: [
+                { title: 'Install "Downloader" on FireStick', desc: 'Open Amazon Appstore on your FireStick, search for "Downloader" and install it.' },
+                { title: 'Download IPTV Smarters App', desc: 'Open Downloader, enter quick code 78522 to download and install IPTV Smarters Pro.' },
+                { title: 'Login with Xtream Codes API', desc: 'Select "Login with Xtream Codes API", enter your server URL, username & password sent to your email.' }
+            ]
+        },
+        smarttv: {
+            app: 'IBO Player / Smart IPTV',
+            badge: 'Tizen & webOS',
+            m3u: 'Upload M3U list to iboplayer.com using your TV Device ID & Key',
+            steps: [
+                { title: 'Install IBO Player from App Store', desc: 'Search for "IBO Player" or "Smart IPTV" in your Samsung Tizen or LG webOS Content Store.' },
+                { title: 'Note your MAC / Device ID', desc: 'Launch the app to reveal your unique Device ID and Device Key shown on the TV screen.' },
+                { title: 'Connect Your StreamVault Subscription', desc: 'Visit the activation portal on your phone or PC, enter your Device ID, paste your M3U URL, and click Save.' }
+            ]
+        },
+        android: {
+            app: 'TiviMate IPTV Player',
+            badge: 'Top Rated UI',
+            m3u: 'Xtream Codes: http://sv-pro.stream:8080 | User/Pass in your email',
+            steps: [
+                { title: 'Download TiviMate or Smarters', desc: 'Install "TiviMate" directly from the Google Play Store on your Android TV box, phone, or tablet.' },
+                { title: 'Add New Playlist', desc: 'Select "Add Playlist" > "Xtream Codes" in settings.' },
+                { title: 'Sync Channels & EPG Guide', desc: 'Enter your credentials to download all 20,000+ live channels with full TV program guide.' }
+            ]
+        },
+        apple: {
+            app: 'GSE Smart IPTV / IPTVX',
+            badge: 'iOS & tvOS',
+            m3u: 'M3U Playlist with EPG auto-sync enabled',
+            steps: [
+                { title: 'Install GSE Smart IPTV from App Store', desc: 'Search for "GSE Smart IPTV" or "IPTVX" on your Apple TV, iPhone, or iPad.' },
+                { title: 'Add Remote Playlist', desc: 'Tap the "+" icon and choose "Add M3U URL".' },
+                { title: 'Paste Subscription Link & Enjoy', desc: 'Paste the M3U link from your welcome email and start watching immediately in 4K.' }
+            ]
+        },
+        windows: {
+            app: 'VLC Player / IPTV Smarters Windows',
+            badge: 'PC & Mac Desktop',
+            m3u: 'VLC: Media > Open Network Stream > Paste M3U link',
+            steps: [
+                { title: 'Download VLC or Windows App', desc: 'Install VLC Media Player or the dedicated StreamVault Windows / macOS client.' },
+                { title: 'Open Network Stream', desc: 'In VLC, press Ctrl+N (or Cmd+N on Mac) and paste your playlist URL.' },
+                { title: 'Instant Desktop Streaming', desc: 'Click Play to browse thousands of channels with keyboard shortcuts and multi-screen support.' }
+            ]
+        }
+    };
+
+    function renderDeviceGuide(deviceId) {
+        if (!deviceGuideContent) return;
+        const guide = deviceGuides[deviceId] || deviceGuides.firestick;
+        deviceGuideContent.innerHTML = `
+            <div class="device-guide-card">
+                <div class="guide-steps-list">
+                    ${guide.steps.map((st, idx) => `
+                        <div class="guide-step-item">
+                            <div class="step-num">${idx + 1}</div>
+                            <div class="step-content">
+                                <h4>${st.title}</h4>
+                                <p>${st.desc}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="guide-app-recommendation">
+                    <div>
+                        <div class="guide-app-header">
+                            <span class="guide-app-badge">${guide.badge}</span>
+                            <h4 style="color: white; font-weight: 700;">${guide.app}</h4>
+                        </div>
+                        <p style="color: #94a3b8; font-size: 13px;">Format delivered immediately with your subscription:</p>
+                        <div class="m3u-sample-box">${guide.m3u}</div>
+                    </div>
+                    <div style="display: flex; gap: 12px; align-items: center; margin-top: 16px;">
+                        <a href="support.html" class="p-btn" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+                            <span>💬 Need Assistance? Talk to AI Support</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    deviceTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            deviceTabBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            const dev = btn.getAttribute('data-device');
+            renderDeviceGuide(dev);
+        });
+    });
+
+    renderDeviceGuide('firestick');
+
     // ===== PAGE LOAD ANIMATION =====
     setTimeout(() => {
         document.body.style.opacity = '1';
