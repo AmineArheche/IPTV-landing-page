@@ -912,6 +912,41 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderDeviceGuide('firestick');
 
+    // ===== GDPR COOKIE CONSENT CONTROLLER =====
+    const cookieBanner = document.getElementById('cookieBanner');
+    const cookieAcceptBtn = document.getElementById('cookieAcceptBtn');
+    const cookieEssentialBtn = document.getElementById('cookieEssentialBtn');
+
+    if (cookieBanner) {
+        let consent = null;
+        try {
+            consent = localStorage.getItem('streamvault_cookie_consent');
+        } catch (e) {}
+
+        if (!consent) {
+            setTimeout(() => {
+                cookieBanner.style.display = 'flex';
+            }, 1200);
+        }
+
+        const dismissCookie = (pref) => {
+            try {
+                localStorage.setItem('streamvault_cookie_consent', pref);
+            } catch (e) {}
+            cookieBanner.style.animation = 'cookie-slide-up 0.3s reverse';
+            setTimeout(() => {
+                cookieBanner.style.display = 'none';
+            }, 300);
+        };
+
+        if (cookieAcceptBtn) {
+            cookieAcceptBtn.addEventListener('click', () => dismissCookie('all'));
+        }
+        if (cookieEssentialBtn) {
+            cookieEssentialBtn.addEventListener('click', () => dismissCookie('essential'));
+        }
+    }
+
     // ===== PAGE LOAD ANIMATION =====
     setTimeout(() => {
         document.body.style.opacity = '1';
